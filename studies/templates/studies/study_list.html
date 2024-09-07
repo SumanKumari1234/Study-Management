@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Study List</title>
+</head>
+<style>
+    body {
+        background-color: #87CEEB;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+    td a {
+        margin-right: 10px;
+    }
+
+    .btn-add {
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Study List</h1>
+        <a href="{% url 'add_study' %}" class="btn btn-primary btn-add">Add Study</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Study Name</th>
+                    <th>Phase</th>
+                    <th>Sponsor</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for study in studies %}
+                <tr>
+                    <td>{{ study.study_name }}</td>
+                    <td>{{ study.study_phase }}</td>
+                    <td>{{ study.sponsor_name }}</td>
+                    <td>{{ study.study_description }}</td>
+                    <td>
+                        <a href="{% url 'view_study' study.pk %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'edit_study' study.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'delete_study' study.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS (optional for functionality like modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
